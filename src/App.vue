@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+import LocalForage from './nostr/LocalForage'
+import IndexedDB from './nostr/IndexedDB'
+import Key from './nostr/Key.ts'
+Key.getOrCreate({autologin: true})
+
+LocalForage.loadEvents()
+IndexedDB.init()
 </script>
 
 <template>

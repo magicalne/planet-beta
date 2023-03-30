@@ -1,13 +1,4 @@
 <script setup lang="ts">
-//import Relays from '../nostr/Relays.ts'
-import LocalForage from '../nostr/LocalForage'
-import IndexedDB from '../nostr/IndexedDB'
-import Key from '../nostr/Key.ts'
-Key.getOrCreate({autologin: true})
-//Relays.init()
-
-LocalForage.loadEvents()
-IndexedDB.init()
 defineProps<{
   msg: string
 }>()

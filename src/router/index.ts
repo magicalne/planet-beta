@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/live',
       name: 'live',
-      component: () => import('../views/Streaming.vue')
+      component: () => import('../views/LiveView.vue')
     }
   ]
 })

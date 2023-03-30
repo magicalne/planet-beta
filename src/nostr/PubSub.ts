@@ -7,7 +7,6 @@ import type { Event, Filter, Sub } from 'nostr-tools'
 import localState from '../LocalState'
 import Events from '../nostr/Events'
 
-//import IndexedDB from './IndexedDB';
 import Key from './Key'
 import Relays from './Relays'
 import SocialNetwork from './SocialNetwork'

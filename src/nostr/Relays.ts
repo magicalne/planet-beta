@@ -44,6 +44,7 @@ export default {
   searchRelays: new Map<string, Relay>(),
   writeRelaysByUser: new Map<string, Set<string>>(),
   DEFAULT_RELAYS,
+  remote_ds: null,
   init() {
     this.relays = new Map<string, Relay>(DEFAULT_RELAYS.map((url) => [url, this.relayInit(url)]))
     this.searchRelays = new Map<string, Relay>(
@@ -133,8 +134,10 @@ export default {
     const myRelays = Array.from(this.relays.values()).filter(
       (relay: Relay) => relay.enabled !== false
     ) as Relay[]
+    console.log(`num of relays: ${myRelays.length}`)
     for (const relay of myRelays) {
-      relay.publish(event)
+      const res = relay.publish(event)
+      console.log(`publish result: ${res}`)
     }
     let recipientRelays: string[] = []
     const mentionedUsers = event.tags.filter((tag) => tag[0] === 'p').map((tag) => tag[1])
@@ -173,6 +176,7 @@ export default {
     const go = () => {
       for (const relay of this.relays.values()) {
         if (relay.enabled !== false && this.getStatus(relay) === 3) {
+          console.log('ws connected')
           this.connect(relay)
         }
         // if disabled
@@ -189,7 +193,7 @@ export default {
 
     for (const relay of this.relays.values()) {
       relay.on('notice', (notice: string) => {
-        console.log('notice from ', relay.url, notice)
+        console.log('####notice from ', relay.url, notice)
       })
       relay.on('disconnect', () => {
         console.log('disconnected from ', relay.url)
